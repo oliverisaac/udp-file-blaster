@@ -29,16 +29,13 @@ var cfgFile string
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "udp-file-blaster",
-	Short: "A brief description of your application",
-	Long: `A longer description that spans multiple lines and likely contains
-examples and usage of using your application. For example:
+	Short: "The fastest file sender in the west!",
+	Long: `UDP-File-Blaster is a file sender with a focus on speed. Built on top of the UDT (UDP Transfer) protocol, it can send files seamlessly between two servers that can talk to each other.
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
-	// Uncomment the following line if your bare application
-	// has an action associated with it:
-	// Run: func(cmd *cobra.Command, args []string) { },
+First, run "udp-file-blaster receive" on the server that will be receiving the files. This will tell you which command to ron on the server that is sending the files.
+
+Second, run "udp-file-blaster send" on the server that will be sending the files, specify the correct IP and port.
+`,
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
@@ -58,10 +55,6 @@ func init() {
 	// will be global for your application.
 
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.udp-file-blaster.yaml)")
-
-	// Cobra also supports local flags, which will only run
-	// when this action is called directly.
-	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
 
 // initConfig reads in config file and ENV variables if set.

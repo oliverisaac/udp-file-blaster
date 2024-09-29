@@ -17,36 +17,30 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 package cmd
 
 import (
-	"fmt"
-
+	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 )
+
+var listenAddress string
+var listenPort int
+var baseDirectory string
+var stripPaths bool
 
 // receiveCmd represents the receive command
 var receiveCmd = &cobra.Command{
 	Use:   "receive",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
-	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("receive called")
+	Short: "Start a client to receive files from a sender",
+	Long:  `Starting a client will tell you where to send the files to`,
+	RunE: func(cmd *cobra.Command, args []string) error {
+		return errors.New("Not impl")
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(receiveCmd)
 
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// receiveCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// receiveCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	receiveCmd.Flags().StringVarP(&listenAddress, "address", "a", "0.0.0.0", "Address to listen on")
+	receiveCmd.Flags().IntVarP(&listenPort, "port", "p", 9876, "Port to listen on")
+	receiveCmd.Flags().StringVarP(&baseDirectory, "dir", "d", "/", "Base directory to place the received files. Files will be placed relative to this directory, so if you receive file '/var/logs/messages' and specify --dir=/example then the file will land in /example/var/logs/messages")
+	receiveCmd.Flags().BoolVar(&stripPaths, "strip", false, "Strip directory paths to and just use base filenames")
 }
