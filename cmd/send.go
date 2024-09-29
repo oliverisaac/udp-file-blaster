@@ -17,7 +17,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 package cmd
 
 import (
-	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 )
 
@@ -32,7 +31,6 @@ var sendCmd = &cobra.Command{
 	Long:  `Once you've started a receiver, use this to send files to the receiver`,
 	Args:  cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		return errors.New("not impl")
 	},
 }
 
